@@ -15,11 +15,10 @@ object Main extends App {
   val port = config.getInt("http.port")
 
   implicit val system = ActorSystem("quiz-management-service")
-
-  val api = system.actorOf(Props(new RestInterface()), "httpInterface")
-
   implicit val executionContext = system.dispatcher
   implicit val timeout = Timeout(10 seconds)
+
+  val api = system.actorOf(Props(new RestInterface))
 
   IO(Http).ask(Http.Bind(listener = api, interface = host, port = port))
     .mapTo[Http.Event]
