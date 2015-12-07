@@ -35,6 +35,7 @@ class QuestionService(implicit val executionContext: ExecutionContext) {
       } // No question found, nothing to update
       case Some(question) =>
         val updatedQuestion = updateEntity(question)
+
         deleteQuestion(id).flatMap { _ =>
           createQuestion(updatedQuestion).map(_ => Some(updatedQuestion))
         }
