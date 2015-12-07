@@ -6,6 +6,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class QuestionService(implicit val executionContext: ExecutionContext) {
 
+  // http://www.jooq.org/doc/3.7/manual/getting-started/tutorials/jooq-in-7-steps/jooq-in-7-steps-step3/
   var questions = Vector.empty[Question]
 
   def createQuestion(question: Question): Future[Option[String]] = Future {
